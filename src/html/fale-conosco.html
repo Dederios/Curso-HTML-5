@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tudo sobre Google Glass</title>
     <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/form.css">
+    <script src="../javascript/funcoes.js"></script>
 </head>
-
-<script src="../javascript/funcoes.js"></script>
 
 <body>
     <div id="interface">
@@ -56,9 +56,9 @@
                     <h3 class="direita">Atualizado em Atualizado em 01/Maio/2013</h3>
                 </header>
 
-                <form action="">
-                    <fieldset>
-                        <legend id="usuario">Identificação do Usuário</legend>
+                <form method="post" id="fContato" action="mailto:dederios42@gmail.com" oninput="calc_total()">
+                    <fieldset id="usuario">
+                        <legend>Identificação do Usuário</legend>
                         <p>Nome:<input type="text" name="tNome" id="cNome" size="20" maxlength="30"
                                 placeholder="Nome Completo" required></p>
                         <p>Senha: <input type="password" name="tSenha" id="cSenha" size="8" maxlength="8"
@@ -71,34 +71,70 @@
                             <br>
                             <input type="radio" name="tSexo" id="cFem" required><label for="cFem">Feminino</label>
                         </fieldset>
-                        <p>Data de Nascimento: <input type="date" name="tNasc" id="cNasc"></p>
+                        <p>Data de Nascimento: <input type="date" name="tNasc" id="cNasc" required></p>
                     </fieldset>
 
-                    <fieldset>
-                        <legend id="endereco">Endereço do Usuário</legend>
-                        <p>Logradouro: <input type="text" name="tRua" id="cRua" size="13" maxlength="80"
-                                placeholder="Rua, Av, Travessa" required></p>
-                        <p>Número: <input type="number" name="tNum" id="cNum" min="0" max="9999" required></p>
-                        Estado:
-                        Cidade:
-
+                    <fieldset id="endereco">
+                        <legend>Endereço do Usuário</legend>
+                        <p><label for="cRua">Logradouro:</label><input type="text" name="tRua" id="cRua" size="13"
+                                maxlength="80" placeholder="Rua, Avenida..." required /></p>
+                        <p><label for="cNum">Número:</label><input type="number" name="tNum" id="cNum" min="0"
+                                max="99999" required /></p>
+                        <p><label for="cEst">Estado:</label>
+                            <select name="tEst" id="cEst" onchange="listaCidades(this.value)">
+                                <option value="0">Escolha o Estado</option>
+                                <optgroup label="Região Norte">
+                                    <option value="AC">Acre</option>
+                                    <option value="TO">Tocantins</option>
+                                </optgroup>
+                                <optgroup label="Região Nordeste">
+                                    <option value="AL">Alagoas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="SE">Sergipe</option>
+                                </optgroup>
+                                <optgroup label="Região Centro-Oeste">
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                </optgroup>
+                                <optgroup label="Região Sudeste">
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                </optgroup>
+                                <optgroup label="Região Sul">
+                                    <option value="PR">Paraná</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="SC">Santa Catarina</option>
+                                </optgroup>
+                            </select>
+                        </p>
+                        <p><label for="cCid">Cidade:</label>
+                            <input type="text" name="tCid" id="cCid" size="20" maxlength="40"
+                                placeholder="Sua Cidade..." list="cidades" onfocus="listaCidades(cEst.value)"
+                                required />
+                            <datalist id="cidades"></datalist>
+                        </p>
                     </fieldset>
 
-                    <fieldset>
-                        <legend id="mensagem">Mensagem do Usuário</legend>
-                        Grau de Urgência:
-                        Mensagem:
+                    <fieldset id="mensagem">
+                        <legend>Mensagem do Usuário</legend>
+                        <p>Grau de Urgência: Mín<input type="range" name="tUrg" id="cUrg" min="0" max="10" step="2"
+                                required>Max</p>
+                        <p>Mensagem:<textarea name="tMsg" id="cMsg" cols="35" rows="5"
+                                placeholder="Deixa aqui sua mensagem" required></textarea></p>
                     </fieldset>
 
-                    <fieldset>
-                        <legend id="pedido">Quero um Google Glass</legend>
-                        Gostaria de adquirir um Google Glass quando disponível
-                        Cor:
-                        Quantidade:
-                        Preço Total: R$
-
-                        [BOTÃO ENVIAR]
+                    <fieldset id="pedido">
+                        <legend>Quero um Google Glass</legend>
+                        <p> <input type="checkbox" name="tPed" id="cPed" required> Gostaria de adquirir um Google Glass
+                            quando disponível</p>
+                        <p>Cor: <input type="color" name="tCor" id="cCor" value="#0000FF" required> </p>
+                        <p>Quantidade: <input type="number" name="tQtd" id="cQtd" min="0" max="5" value="0" required>
+                        </p>
+                        <p>Preço Total: R$ <input type="text" name="tTot" id="cTot" placeholder="Total a pagar" readonly
+                                required> </p>
                     </fieldset>
+                    <input type="image" src="../images/botao-enviar.png" alt="Botão Enviar" name="tEnviar">
                 </form>
 
             </article>
